@@ -328,4 +328,4 @@ if __name__ == '__main__':
         enable_caching=True, # True
         location=REGION)
 
-    start_pipeline.run()
+    # start_pipeline.run()
