@@ -1,1 +1,2 @@
-kfp==1.7.2
+kfp
+google-cloud-aiplatform
