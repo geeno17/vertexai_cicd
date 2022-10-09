@@ -5,6 +5,7 @@ from typing import NamedTuple
 from kfp.v2.dsl import pipeline
 from kfp.v2.dsl import component
 from kfp.v2 import compiler
+import json
 
 if __name__ == '__main__':
     data = json.load(open('config.json'))
