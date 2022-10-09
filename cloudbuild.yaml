@@ -1,4 +1,11 @@
 steps:
+
+  # Upload dataflow pipeline to GCS.
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['cp', '-r', 'dataflow_pipeline', 'gs://bucket_cs_mlops']
+    id:  'upload'
+    waitFor: ['compile']
+
   # Install dependencies
   - name: python
     entrypoint: pip
