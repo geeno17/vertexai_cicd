@@ -12,6 +12,6 @@ steps:
 
   # Upload compiled pipeline to GCS.
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: ['cp', 'basic_pipeline.json', 'gs://bucket_cs_mlops']
+    args: ['cp', 'demo.txt', 'gs://bucket_cs_mlops']
     id:  'upload'
     waitFor: ['compile']
