@@ -1,24 +1,25 @@
 steps:
-
   # Upload dataflow pipeline to GCS.
   - name: 'gcr.io/cloud-builders/gsutil'
     args: ['cp', '-r', 'dataflow_pipeline', 'gs://bucket_cs_mlops']
-    id:  'upload'
-    waitFor: ['compile']
+    id:  'upload_dataflow_pipeline'
 
   # Install dependencies
   - name: python
     entrypoint: pip
     args: ["install", "-r", "requirements.txt", "--user"]
-
+    id: 'install_dependencies'
+    waitFor: ['upload_dataflow_pipeline']
+    
   # Compile pipeline
   - name: 'python'
     entrypoint: 'python'
     args: ['pipeline.py']
-    id: 'compile'
+    id: 'compile_pipeline'
+    waitFor: ['install_dependencies']   
 
   # Upload compiled pipeline to GCS.
   - name: 'gcr.io/cloud-builders/gsutil'
     args: ['cp', 'ml_glassclassification.json', 'gs://bucket_cs_mlops']
-    id:  'upload'
-    waitFor: ['compile']
+    id:  'upload_vertex_pipeline'
+    waitFor: ['compile_pipeline']
